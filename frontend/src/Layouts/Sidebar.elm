@@ -533,6 +533,15 @@ view props shared path { toContentMsg, content, model } =
                 :: styles.colorStyleBackground
             )
             [ viewSidebar props shared model path toContentMsg content.body
+
+            -- persistent audio player (audio-player.ts); hidden until an audio is started
+            , Html.node "pareto-audio-bar"
+                (Attr.attribute "lang" shared.browserEnv.locale
+                    :: styles.colorStyleBackground
+                    ++ styles.colorStyleBorders
+                    ++ styles.colorStyleGrayscaleTitle
+                )
+                []
             , viewLinktoInternalPage shared.nostr
             , AuthDialog.view shared.theme shared.browserEnv shared.loginStatus shared.nostr shared.authDialog
                 |> Html.map (AuthDialogMsg >> toContentMsg)
@@ -807,9 +816,9 @@ viewMainContent content toContentMsg maybeFixedTopPartHeight =
                 [ Tw.flex_1
                 , Tw.overflow_y_auto
                 , Tw.relative
-                , Css.property "height" ("calc(100vh - 5rem - 56px - " ++ topPartHeight ++ ")") -- 5rem = 80px for header
+                , Css.property "height" ("calc(100vh - 5rem - 56px - var(--pareto-audio-bar-height, 0px) - " ++ topPartHeight ++ ")") -- 5rem = 80px for header
                 , Bp.sm
-                    [ Css.property "height" ("calc(100vh - 5rem - " ++ topPartHeight ++ ")") -- 5rem = 80px for header
+                    [ Css.property "height" ("calc(100vh - 5rem - var(--pareto-audio-bar-height, 0px) - " ++ topPartHeight ++ ")") -- 5rem = 80px for header
                     ]
                 , print
                     [ Tw.overflow_y_visible

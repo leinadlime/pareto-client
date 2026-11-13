@@ -914,16 +914,12 @@ generateAudioElement maybeLoadedContent url urlString mimeType =
                     ( False, Html.a, [ href urlString ] )
     in
     if showEmbedded then
-        Html.audio
-            [ controls True
+        -- starts the persistent player (audio-player.ts), which keeps playing across pages
+        Html.node "pareto-audio-trigger"
+            [ Attr.attribute "src" (Erl.toString url)
+            , Attr.attribute "type" mimeType
             ]
-            [ Html.source
-                [ src <| Erl.toString url
-                , type_ mimeType
-                ]
-                []
-            , text "Your browser doesn't support the HTML audio tag"
-            ]
+            []
 
     else
         genericThumbnailPreview linkElement clickAttr "/images/audio-placeholder.jpeg"

@@ -173,6 +173,21 @@ viewArticle articlePreviewsData articlePreviewData article =
                 Nothing ->
                     []
 
+        -- read by the audio player when a file in this article is started
+        audioContextAttrs =
+            [ Attr.attribute "data-audio-title" (Maybe.withDefault "" article.title)
+            , Attr.attribute "data-audio-author" authorName
+            , Attr.attribute "data-audio-image" (Maybe.withDefault "" article.image)
+            ]
+
+        authorName =
+            case articlePreviewData.author of
+                AuthorProfile profile _ ->
+                    profileDisplayName profile.pubKey profile
+
+                AuthorPubkey _ ->
+                    ""
+
         contentMargins =
             [ css
                 [ Tw.px_1
@@ -235,6 +250,7 @@ viewArticle articlePreviewsData articlePreviewData article =
             ]
             [ Html.article
                 (langAttr
+                    ++ audioContextAttrs
                     ++ [ css
                             [ Tw.flex_col
                             , Tw.justify_start

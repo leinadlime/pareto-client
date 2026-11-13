@@ -11,6 +11,7 @@ import NDKCacheAdapterDexie from "@nostr-dev-kit/cache-dexie";
 import { BlossomClient } from "blossom-client-sdk/client";
 import "./clipboard-component";
 import "./elm-oembed";
+import "./audio-player";
 import { createRelayManager } from "./relay-manager";
 import { filterRelayUrls, isBlockedRelayUrl, setBlockedRelayUrls } from "./blocked-relays";
 import { armExtensionPrompt, handleAuthCommand, isAuthCommand, restoreActiveIdentity } from "./authIdentities";
