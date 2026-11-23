@@ -4,6 +4,7 @@ import Components.Button as Button
 import Html.Styled as Html exposing (Html, div, span, text)
 import Html.Styled.Attributes exposing (attribute, css)
 import I18Next
+import Tailwind.Breakpoints as Bp
 import Tailwind.Utilities as Tw
 import Translations.AppUpdate as Translations
 import Ui.Shared exposing (emptyHtml)
@@ -33,19 +34,24 @@ view props =
                 ++ [ attribute "role" "status"
                    , attribute "aria-live" "polite"
                    , css
+                        -- A floating notice in the bottom corner. A full-width bar at the top
+                        -- covered the logo, the banner and the sign-in button on every page.
                         [ Tw.fixed
-                        , Tw.top_0
-                        , Tw.left_0
-                        , Tw.right_0
+                        , Tw.bottom_4
+                        , Tw.left_4
+                        , Tw.right_4
                         , Tw.z_50
                         , Tw.flex
                         , Tw.flex_row
                         , Tw.items_center
-                        , Tw.justify_center
+                        , Tw.justify_between
                         , Tw.gap_4
-                        , Tw.border_b
+                        , Tw.border
+                        , Tw.rounded_lg
+                        , Tw.shadow_lg
                         , Tw.px_4
-                        , Tw.py_2
+                        , Tw.py_3
+                        , Bp.sm [ Tw.left_auto, Tw.max_w_md ]
                         , print [ Tw.hidden ]
                         ]
                    ]
